@@ -1,0 +1,27 @@
+Submit classes for ArrayList implementation of Stack<E>. and Queue<E> with operations push, pop, peek, empty for Stack and add, remove, peek.  
+
+import java.util.*;
+
+public class StackArrayList <E> extends ArrayList<E> {
+
+    //default constructor is inheritaed for free from ArrayList class
+    //we are going to use top of the stack as the bottom of the arraylist
+    //for efficency
+
+    public void push(E obj){
+        add (obj);
+    }
+
+    public E pop(){
+        return(remove(size()-1));
+    }
+
+    public E peek(){
+        return(get(size()-1));
+    }
+
+    public boolean isEmpty(){
+        return (super.isEmpty());
+    }
+
+}
