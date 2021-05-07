@@ -1,0 +1,131 @@
+import java.util.*;
+import java.io.*;
+
+public class MyHashSet {
+
+    //ArrayList<String> dictionary;
+    ArrayList<LinkedList<String>> wordList;
+    int wordListSize;
+    int tableSize = 414703;
+    String filename = "EnglishWordList.txt";
+    ArrayList<String> dictionary;
+
+    public MyHashSet() {
+        dictionary = new ArrayList<String>();
+        wordList = new ArrayList<LinkedList<String>>(tableSize);
+            for (int i=0; i<tableSize; i++)
+                wordList.add(new LinkedList<String>());
+        wordListSize=0;
+    }
+
+    public int hash(String s){
+        return (Math.abs(s.hashCode())%tableSize);
+    }
+
+
+    public static void main (String [] args){
+
+        new MyHashSet().run();
+    }
+
+    public void run() {
+       // MyHashSet mhs = new MyHashSet();
+        Scanner fileScanner;
+        String word="";
+        int max = 0;
+        try
+        {
+
+            fileScanner = new Scanner (new File ("EnglishWordList.txt"));
+
+
+            while (fileScanner.hasNext()) {
+                word = fileScanner.nextLine();
+                word = word.trim();
+                if (!word.isEmpty()) {
+                    int h = hash(word);
+                    LinkedList<String> list = wordList.get((h)); //could be empty
+                    if (!list.contains(word)) {
+                        list.add(word);
+                        if (list.size()>max) {
+                            max = list.size();
+                        }
+                        wordListSize++;
+                    }
+                }
+            }
+//                &&
+//         !dictionary.contains(word)) {
+//                dictionary.add(word);
+//                wordListSize++;
+//            }
+
+        }
+
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+
+        System.out.println("word list size = "+wordListSize);
+        System.out.println("max collisions size = "+max);
+        for (LinkedList<String> Li:wordList)
+            if (Li.size()==max)
+                System.out.print(Li);
+
+    }
+
+}
+
+
+
+
+
+
+import java.util.*;
+public class HashExample {
+    //HashMap<String, ArrayList<Integer>>
+
+    public HashSet<Integer> union(LinkedList<Integer> list1, LinkedList<Integer> list2) {
+        HashSet<Integer> union = new HashSet<>(list1);
+        /*HashSet<Integer> union = new HashSet<>();
+        Iterator<Integer> iter1 = list1.iterator();
+        while (iter1.hasNext())
+            union.add(iter1.next());
+            */
+        //O(n) time where n is the size of the linked list list1
+        Iterator<Integer> iter2 = list2.iterator();
+        while (iter2.hasNext())
+            union.add(iter2.next());
+        //O(m) linear time where m is the size of list2
+        return union;
+    }
+
+    public boolean checkLists(int k, ArrayList<Integer> arr1, ArrayList<Integer> arr2) {
+        HashSet<Integer> list = new HashSet<>(arr1);
+        for (Integer p:arr2)
+            if (list.contains(k-p)) return true;
+        return false;
+
+    }
+
+
+    public static void main(String[] args) {
+        // HashExample he = new HashExample();
+        ArrayList<Integer> list1 = new ArrayList<>(List.of(1,4,-3,-3,-5));
+        ArrayList<Integer> list2 = new ArrayList<>(List.of(8,7,7,2,5));
+        System.out.println(new HashExample().checkLists(10,list1,list2));
+
+
+        // he.union(list1,list2);
+
+
+
+
+
+
+
+    }
+
+
+}
