@@ -1,0 +1,69 @@
+#2- 
+public void swapPairs(ArrayList<String> list) {
+   for(int i = 0; i < list.size() -1; i +=2) {
+        String string = list.get(i +1);
+        list.set(i+1, list.get(i));
+        list.set(i, string);
+    }
+    
+}
+
+#4-
+public void doubleList(ArrayList<String> list) {
+    for (int i=0; i<list.size(); i += 2) {
+	list.add(i, list.get(i));
+    
+}
+}
+
+#6-
+public void minToFront(ArrayList<Integer> list) {
+    int min = list.get(0);
+    int index = 0;
+    
+    for(int i = 0; i < list.size(); i++) {
+        if(list.get(i) < min) {
+            min = list.get(i);
+            index = i;
+        }
+    }
+    
+    list.remove(index);
+    list.add(0, min);
+}
+
+#7-
+public void removeDuplicates(ArrayList<String> list) {
+    for (int i = 0; i < list.size() -1 ; i++) {
+	if (list.get(i).equals(list.get(i+1))) {
+	    list.remove(i+1);
+	    i--;
+	}
+    }
+}
+
+
+
+#14- public static void removeShorterStrings(ArrayList<String> list) {
+    for (int i =0; i< list.size()-1; i++) {
+        String word1 = list.get(i);
+        String word2 = list.get(i + 1);
+        if (word1.length() <= word2.length()) {
+            list.remove(i);
+        } else {
+            list.remove(i + 1);
+        }
+    }
+}
+
+#19-
+public int compareTo(Point2D that) {
+	Point2D origin = new Point2D();
+	double d1 = this.distance(origin);
+	double d2 = that.distance(origin);
+	if (d1 - d2 < 0)
+	    return -1;
+	if (d1 -  d2 > 0)
+	    return 1;
+	return 0;
+    }
