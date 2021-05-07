@@ -1,0 +1,93 @@
+Excerise 2
+public static List<E> alternate (List<E>, list1, List<E>, list2){
+	Iterator<E> iter1 = list1.iterator();
+	Iterator<E> iter2 = list2.iterator();
+	List <E> newList = new ArrayList<>();
+	while (iter1.next() || iter2.hasNext()){
+		newList.add(iter1.next());
+		newList.add(iter2.next());
+		}
+		if (iter.2hasNext())
+		newlist.add(iter2.next());
+		}
+  return newList
+  }
+
+}
+
+Excerise 3
+removeInRange (list,0,5,13)
+remove ll 0's in the list occuring between 5 nd 13
+
+Public void removeInRange(LinkedList<E>, int start, int end){
+	ListIterator<E> iter = list.listIterator(end);
+
+	//while (int i = end; i >= start; i--)
+	// everytime you do a previous() call, you reduce the index value
+	
+	int index = end -1;
+	while (iter.hasPrevious() && index >= start) {
+	  E temp = iter.previous();
+	  index--;
+	   if (temp.equals(val)
+	    remove(iter.next());
+
+
+Excerise 4
+Use iterator to g over the  list one at a time and compate it wth the value (pivot)
+if the value is less than add it to one list
+if the value is greater than add it to the scond list...
+addAll() method does the combining 
+
+public List<Integer> partition (List<Integer>, p, int val) {
+Iterator<Integer> iter = p.iterator();
+List<Integer> List 1 = new ArrayList<>();
+List<Integer> List 2 = new ArrayList<>();
+
+while (iter.hasNext()) {
+if (iter.next()<val)
+ list.add(iter.hasNext()){
+    Integer k = iter.next();
+     if (k<val) List1.add(k);
+	else List 2.add(k);
+}
+	List1.addAll(List2);
+	
+
+	return list1;
+
+}
+	
+}
+
+Excerise 6
+
+use two loops: for every value v at a specific index i{
+if v is not present elsewhere increment the unique counter.
+// aka check if v is present or not in every location of the of the list
+
+
+public int niqueCount(List<Integer> list){
+
+int count = 0;
+Iterator <Integer> iter1 = list.iterator();
+int index1 = 0;
+Iterator <Integer> iter2 = list.iterator();
+int index 2 = 0;
+
+while (iter1.hasNext()) {
+integer p = iter1.next();
+index1++;
+while (iter2.hasNext()
+integer k = iter2.next();
+index2++;
+if (p==k) && (index1 != index2) 
+continue;
+if (p==k)&& (index1 == index2) 
+continue
+if (p!=k) count++;
+}
+}
+}
+}
+  
