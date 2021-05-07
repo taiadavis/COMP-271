@@ -1,0 +1,147 @@
+
+public class Node <E>{
+    
+    Node<E> left;
+    Node<E> right;
+    Node<E> parent;
+    E  label;
+    
+    public Node(Node<E> le, Node<E> ri, Node<E> pa){
+        left=le;
+        right=ri;
+        parent=pa;
+        
+        
+    }
+    
+    public Node(E val){
+        left=null;
+        right=null;
+        parent=null;
+        label=val;
+        
+        
+    }
+    
+    public Node(){
+        left=null;
+        right=null;
+        parent=null;
+        label=null;
+        
+        
+    }
+    
+    public void addLeft(Node<E> le) {
+       left=le; 
+       le.addParent(this);
+       
+        
+    }
+    
+    public void addRight(Node<E> ri) {
+        
+      right=ri;  
+      ri.addParent(this);
+    }
+    
+    public void addParent(Node<E> pa){
+     parent=pa;   
+        
+    }
+    
+    public void setLabel(E val){
+        label=val;
+        
+    }
+    
+    
+    
+}
+
+
+
+
+public class BinaryTree<E> {
+
+    int size;
+    Node<E> root;
+    
+    public BinaryTree () {
+     size =0;
+     root=null;
+    }
+    
+    public BinaryTree(E val) {
+        root = new Node(val);
+        // root node only
+        size=1;
+        
+    }
+    
+    public void addLeft(Node<E> node, E val) {
+        Node<E> n = new Node(val);
+        node.addLeft(n);
+        size++;
+    }
+    
+    public void addRight(Node<E> node, E val) {
+        
+       Node<E> n = new Node(val);
+        node.addRight(n);
+        size++;
+    } 
+        
+    public static void main(String[] args){
+        
+        BinaryTree bt = new BinaryTree("cat");
+        bt.addLeft(bt.root,"dog");
+        bt.addRight(bt.root,"mouse");
+    }
+    
+}
+
+
+
+
+
+public class BinaryTree<E> {
+    int size;
+    Node<E> root;
+
+    public BinaryTree (){
+        size = 0;
+        root = null;
+    }
+
+    public BinaryTree(E Val){
+        root = new Node(val);
+        // root node only
+        size = 1;
+    }
+
+    public void addLeft(Node<E> node, E val){
+        Node <E> n = new Node(val);
+        node.addleft(n);
+        size++;
+        return n;
+    }
+
+    public void addRight(Node<E> node, E val){
+        Node <E> n = new Node(val);
+        node.addRight(n);
+        size++;
+        return n;
+    }
+    public static void main(String[] args){
+
+        BinaryTree <String>bt = new BinaryTree("-");
+        Node<String> n1 = bt.addLeft(bt.root, "*");
+        Node<String> n2 = bt.addRight(bt.root,"/");
+        
+        bt.addLeft(n1, "x");
+        bt.addRight(n1, "y");
+        bt.addLeft(n2, "y");
+        bt.addRight(n2, "z");
+    }
+}
