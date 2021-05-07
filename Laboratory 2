@@ -1,0 +1,26 @@
+	4. Super is the superclass of the current class.
+	This refers to the current object in the class.
+	Use This, for accessing the current class object methods, fields, constructors.
+	Use Super to access methods from the parent class.
+	5. Undergraduate student class can access the setAge method but not the name or age field of Student Class.
+	6. Public UndergraderateSudent (String name){
+	Super(name,18);
+	Year=0;
+	}
+	7. public void setAge(int age) {
+		
+			super.setAge(age);
+			year++;
+		}
+	8. Vroom
+	car 1
+	car 2
+	Vroom
+	truck 1
+	car 2
+	9. Vroom vroom
+	Truck 1
+	Car 1
+	
+	10. ABCD
+	
