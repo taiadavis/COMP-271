@@ -1,0 +1,292 @@
+1. Write a method
+public String replaceChar(String p, int k, char c) {
+}
+that given a String p, an int k, and a char c, returns a String with the kth character
+replaced by c. Of course, 0<=k<=p.length()-1, otherwise handle it via an exception or
+error. For example, replaceChar(“kettle”,0,’s’) will return “settle”. You can assume that
+char c is a valid character.
+(10 points)
+
+public static String replaceChar(String p, int k, char c) {
+ int len = p.length();
+ String ret=null;
+
+ if(k>=0 && k<len && len>0) {
+ String pre = p.substring(0,k);
+ String post =p.substring(k+1);
+ ret= pre+c+post;
+ }
+ else throw new IndexOutOfBoundsException();
+ return ret;
+}
+
+--------------------------------------------------------------------------------------------
+2. Consider the following class Student
+public class Student {
+protected String name;
+protected int age;
+public Student (String name, int age) {
+this.name= name;
+this.age=age;
+}
+public void setAge(int age) {
+this.age=age;
+}
+}
+(a) Write a Java class of GraduateStudent that is a subclass of the Student class with the
+private fields
+String major and String degreeName
+Where major is the field of specialization such as (Computer Science, History, etc)
+and degreeName is one of MS, MA, MEd, Phd etc.
+(i) Write a constructor that creates a graduate student with all relevant fields.
+(ii) Write setter and getter methods for major and degreeName (total of 4
+methods).
+(iii) Write a method equals (Object student) that tests for equality of two students
+when the names and the ages are identical.
+(iv) Write a method equals(Object gradStudent) that tests for equality of two
+graduate students when name, age, major and degreeName are all identical.
+(v) Then modify Student class as follows to implement the Comparable<T>
+interface as follows
+ public class Student implements Comparable<Student> {
+}
+which will contain the methods in the Student class above and an additional
+method that overrides the compareTo (..) method as follows
+public int compareTo(Student other) {
+}
+student1.compareTo(student2) returns a negative integer if student1’s name is
+less than student2’s name and returns a positive integer if student1’s name is
+greater than student2’s name. As strings, I am sure you understand the notion
+of < or > in terms of their dictionary ordering. For instance, cat > cab and art
+<zebra.
+If student1’s name is equal to student2’s name then (i) return a negative
+integer if student1’s age < student2’s age or (ii) return a positive integer if
+student1’s age > student2’s age. If both student names and ages are the same
+then return 0.
+ (30 points)
+ In this question, you will generate two Java classes, Student and GraduateStudent, each
+having methods and constructors as indicated above.
+
+public class Student {
+    protected String name;
+    protected int age;
+    public Student (String name, int age) {
+        this.name= name;
+        this.age=age;
+    }
+    public void setAge(int age) {
+        this.age=age;
+    }
+  
+    public class Student implements Comparable<Student> {
+	}
+
+}
+
+
+
+--------------------------------------------------------------------------------------------
+3. Given a linked list of integers, write a method that computes and prints the pairwise sums
+which is illustrated below with an example.
+ public void pairwiseSum(LinkedList<Integer> arr) {
+}
+If the linked list has values 5,3,2,9,3,15,22 from head to tail, the pairwise sums would be
+8,5,11,12,18,37 which is the sum of two consecutive values from left to right. Notice the
+output will be of size one less than the original. You will output the pairwise sums
+exactly as above on a single line, comma separated. If the original list is of size 0 or 1
+then print an appropriate error message. Make sure your code works for a linked list of
+any size, not just for the example above. Use any algorithm that does not use the get()
+method of LinkedList class, for the sake of efficiency.
+(10 points)
+
+import java.util.*;
+public class PairwiseSums
+{
+ public void pairWiseSums(LinkedList<Integer> al) {
+
+ if (al.size()<=1) {
+ System.out.println("array list is too small ... must have at least two values");
+ return;
+ }
+
+ ListIterator<Integer> li1 = al.listIterator();
+ ListIterator<Integer> li2 = al.listIterator(1);
+ while (li1.hasNext()&&li2.hasNext()) {
+ int i= li1.next();
+ int j=li2.next();
+ if( li2.hasNext())
+ System.out.print(i+j+" , ");
+ else System.out.print(i+j);
+ }
+
+ }
+ 
+ You do not need a main() but if you want to test it, here it is:
+public static void main(String[] args) {
+ LinkedList<Integer> p = new LinkedList<Integer>();
+ p.add(5);p.add(3);p.add(2);p.add(9);p.add(3);p.add(15);p.add(22);
+ new PairwiseSums().pairWiseSums(p);
+
+ }
+
+}
+---------------------------------------------------------------------------------------------
+
+4. Given an arraylist of Strings, write a method that checks if any two strings in the arraylist
+when concatenated is identical to any other String in the arraylist.
+public void twoStringEquals(ArrayList<String> arr ) {
+}
+For example, if the arraylist has [“cat”, “dog”, “dot”, “ca”, ”t”, “do”,”t”,”g”], then the
+answer would be to print “Yes, ca at location 3 and t at location 4 together form cat at
+location 0. Of course, there are other answers too, for instance, do and t form dot or do
+and g form dog. Any one answer is good enough. Concatenate operation is done by the
+usual + in Java. You can use get(..) or any other method to retrieve values from the
+ArrayList.
+(15 points)
+
+import java.util.*;
+public class StringCheck
+{
+ public void twoStringEquals (ArrayList<String> arr) {
+ boolean found=false;
+
+ for (int i=0;i<arr.size();i++)
+ for (int j=0;j<arr.size();j++)
+ if (i!=j) {
+ for (int k=0;k<arr.size();k++)
+ if (al.get(k).equals(arr.get(i)+arr.get(j))) {
+ System.out.println ("Yes, "+arr.get(i)+" at location "+i+" and "+arr.get(j)+" at location
+"
+ +j+" together form "+arr.get(k)+" at location "+k);
+ found=true;
+}
+ }
+ if (!found) System.out.println(“ no string match …”);
+ }
+}
+ 
+ 
+ ----------------------------------------------------------------------------------------------------
+5. Given three linked lists with any type E, combine it to form a new linked list such that the
+new list contains the elements in the order of (1st element from list1, 1st element from
+list2, 1st element from list 3, 2nd element from list1, 2nd element from list2, 2nd element
+from list3, …) etc. The three lists can be of different sizes including possibly being
+empty. This is similar to the one we worked on with two lists in class.
+public LinkedList<E> alternateThreeLists (LinkedList<E>list1, LinkedList<E>list2, LinkedList<E>list3)
+{
+}
+Write a main (..) method to test the code you wrote by using Integer values in the lists.
+Both methods (the main() and alternateThreeLists(..)) must be part of a Java class file that
+you will submit.
+(15 points)
+
+import java.util.*;
+public class ThreeLists<E> {
+public LinkedList<E> alternateThreeLists(LinkedList<E> list1, LinkedList<E> list2, LinkedList<E>
+list3) {
+ Iterator<E> iter1 = list1.iterator();
+ Iterator<E> iter2 = list2.iterator();
+ Iterator<E> iter3 = list3.iterator();
+ LinkedList<E> newList = new LinkedList<>();
+ while (iter1.hasNext() || iter2.hasNext() || iter3.hasNext()) {
+ if (iter1.hasNext()) {
+ newList.add(iter1.next());
+ }
+ if (iter2.hasNext())
+ newList.add(iter2.next());
+ }
+ if (iter3.hasNext())
+ newList.add(iter3.next());
+ }
+ return newList;
+ }
+ 
+ public static void main(String[] args){
+ ThreeLists<Integer> e = new ThreeLists<>();
+ List<Integer> list1 = new LinkedList<>(List.of(5,10,15));
+ List<Integer> list2 = new LinkedList<>(List.of(20,25,35,45));
+ List<Integer> list2 = new LinkedList<>(List.of(1,2,3,4));
+ System.out.println(e.alternateThreeLists(list1,list2,list3));
+ }
+}
+
+--------------------------------------------------------------------------------------------
+6. Given an array of integers, and given a specific value k (not equal to 0), produce all
+unique pairs of values in the array which differ by k.
+public void differByK (int [] arr, int k) {
+}
+For example, if the array has [1,4,9,12, 6, 15, 5, 13,17] and k=3, the answer would be (1,4
+) ( 9,12), ( 9,6), (12,15). If k=4, the answer would be (1,5), (9,5), (13,17), (13,9). Your
+code should not produce the same pair of integers reversed. (for instance for k=4
+example, above you should not print (1,5) and (5,1) ).
+(10 points)
+
+The first one below is simpler and will suffice for your answer.
+// you can do this efficiently with hashing
+// but we will do this inefficiently but correctly. This algorithm has O(n2
+) time complexity.
+// we will do this by assuming no duplicates
+// if there are duplicate values in the array, we can first remove them, so this assumption is ok
+public static void pairDifference (int[] arr, int k) {
+ int s=arr.length;
+ for (int i=0; i<s-1;i++)
+ for (int j=i+1; j<s;j++)
+ if (Math.abs(arr[i]-arr[j])== Math.abs(k))
+ System.out.println(arr[i]+","+arr[j]);
+ }
+//second method
+// if we assume that the array contains duplicates
+//then you first eliminate the duplicates and do the above steps
+//the following code shows you how
+public static void pairDifference (int[] arr, int k) {
+ int s=arr.length;
+ int newS=0;
+ //sort the array first, the duplicates will now appear together, if any.
+ Arrays.sort(arr);
+ int [] uniqueArr= new int[s];
+ int p=0;
+ uniqueArr[newS]=arr[p];
+ while (p<s-1) {
+ p++;
+ if (arr[p]==uniqueArr[newS])
+ continue;
+ else {
+ newS++;
+ uniqueArr[newS]=arr[p];
+ }
+ }
+ //the size of the uniqueArray is newS+1;
+ //uniqueArr does not contain duplicates and it is in the sorted order.
+ // the following code does the work in O(n^2) time
+
+ for (int i=0; i<newS;i++)
+ for (int j=i+1; j<newS+1;j++)
+ if (Math.abs(uniqueArr[i]-uniqueArr[j])== Math.abs(k))
+ System.out.println(uniqueArr[i]+","+uniqueArr[j]);
+ }
+ 
+
+--------------------------------------------------------------------------------------------
+
+7. Write a method called averageConsonants(ArrayList<String> arr) {
+}
+that takes an ArrayList of Strings with only small-case, English alphabetic characters a
+through z, and returns the average number of consonants per String. For your reference,
+any letter that is not a vowel is a consonant. This is also similar to the one we worked on
+in the class. (10 points). 
+
+public double averageConsonants (ArrayList<String> arr) {
+ char p;
+ int count = 0;
+ for (String s: arr) {
+ for (int i = 0; i < s.length(); i++) {
+ p = s.charAt(i);
+ if (!(p == 'a'|| p == 'e' || p == 'i' || p == 'o' || p == 'u'))
+ count++;
+ }
+}
+ return ((double) count/arr.size());
+ }
+
+
+
+
