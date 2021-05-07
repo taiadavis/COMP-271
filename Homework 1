@@ -1,0 +1,74 @@
+package com.company;
+
+//A point object represents  pair of (x,y) cordinates.
+public class Point {
+    private double x;
+    private double y;
+
+    //default constructor
+    //no return value
+    public Point ()
+    {
+        x = 0;
+        y = 0;
+    }
+    // non default constructor
+    // no return value
+    public Point (double x, double y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
+    public double quadrant() {
+        if (x > 0 && y > 0) {
+            return 1 ;
+        }else if (x < 0 && y >0){
+            return 2;
+        }else if (x < 0 && y < 0){
+            return 3;
+        }else if (x > 0 && y < 0){
+            return 4;
+        }else{
+            return 0;
+        }
+    }
+
+    public void flip (){
+
+       double variable = x;
+       x = -y;
+       y = -variable;
+
+    }
+
+    public double manhattanDistance (Point other){
+        double x = this.x -other.x;
+        double y = this.y -other.y;
+        return Math.abs(x) + Math.abs(y);
+
+    }
+
+    public boolean isVertical (Point other){
+        return this.x == other.x;
+    }
+
+    public double slope (Point other){
+        if (this.x == other.x)
+            throw new IllegalArgumentException();
+
+        return ((this.y - other.y)) / ((this.x - other.x) *1.0);
+    }
+
+    public boolean isCollinear (Point p1, Point p2){
+        if (this.x == p1.x && this.x == p2.x)
+            return this.x == p1.x && this.x == p2.x;
+
+        double v1 = ((this.y - p1.y)) / ((this.x - p1.x) *1);
+        double v2 = ((this.y - p2.y)) / ((this.x - p2.x)*1);
+
+        if (v1 == v2) return true;
+
+        return false;
+        }
+}
