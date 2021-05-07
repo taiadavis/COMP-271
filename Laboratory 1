@@ -1,0 +1,98 @@
+From the attached document, answer questions 11, 12, 14, 15, and 16 and submit to Sakai the two Java source code files as a single text file (copy the code back to back).
+
+
+
+BankAccount.Java
+package com.company;
+
+public class BankAccount {
+    String name;
+    double balance;
+    static double fee;
+
+    public BankAccount() {
+        name="";
+        balance=0;
+        fee=1.0;
+    }
+
+   public BankAccount(String n, double bal){
+        name=n;
+        balance=bal;
+        fee=1.0;
+    }
+
+    public void deposit(double amount){
+        balance+=amount;
+    }
+
+    public void withdraw(double amount){
+        if (balance>= (amount+fee))
+            balance = balance-amount-fee;
+        else
+            System.out.println("insufficent Funds");
+    }
+
+    public String toString(){
+
+            return (name+", $"+balance);
+    }
+
+}
+
+
+
+
+Line.Java
+package com.company;
+
+public class Line {
+    Point first;
+    Point second;
+    
+    public Line(Point p1, Point p2){
+        first = p1;
+        second = p2;
+    }
+    public Line (int x1, int y1, int x2, int y2){
+        Point p1 = new Point(x1,y1);
+        Point p2 = new Point(x2, y2);
+        first = p1;
+        second = p2;
+    }
+    
+    //Question 15
+    public double getSlope(){
+        if (first.getX()!=second.getX())
+        return((first.getY()-second.getY())/((first.getX()-second.getX())*1.0));
+        else
+            System.out.println("Sloppe is infinite");
+    }
+    
+    public Point getP1(){
+        
+        return first;
+    }
+    public Point getP2(){
+
+        return second;
+    }
+    
+    public String toString(){
+        
+        return("[("+first.getX()+","+first.getY()+",("+second.getX()+","+second.getY()+")]");
+        
+    }
+    
+    
+    public static void main(String [] args){
+        //Same as what is below
+        //Point p1 = new Point(3,5);
+        //Point p2 = new Point(6,7);
+        // Line l1 = new Line(p1,p20;
+        
+            Line L1 = new Line(new Point(3,5), new Point(6,7));
+            System.out.println(L1.toString());
+    }
+    
+}
