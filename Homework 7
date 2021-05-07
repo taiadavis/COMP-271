@@ -1,0 +1,159 @@
+Chapter 14
+
+Exercises : 11,12,13,14, and 15.
+
+Submit .java files as zipped.  Use only java.util.* classes Stack<E> and Queue<E> where E is Integer.
+
+Secondly, you may create Stack and Queue objects as follows:
+
+Stack<Integer> st = new Stack<>();
+
+Queue<Integer> que = new LinkedList<>();
+
+The methods of Interface Queue<E> are implemented in LinkedList<> class.  So you can call the Queue methods via the methods implemented in LinkedList.  Essentially, Queue data structure is implemented using LInkedList class.  
+
+Note that these are marked as Exercises at the end of the chapter, not self-check or projects.  
+
+
+import java.util.*;
+
+public class isSorted {
+
+    public boolean isSorted(Stack<Integer> s) {
+        Stack<Integer> st = new Stack<Integer>();
+        if (s.size() < 1)
+        return true;
+
+        boolean sorted = true;
+
+        st.push(s.pop());
+        while(!s.isEmpty()) {
+            if (st.peek() > s.peek()) {
+                sorted = false;
+            }
+            st.push(s.pop());
+        }
+
+        while(!st.isEmpty())
+            s.push(st.pop());
+
+        return sorted;
+    }
+
+}
+
+//question 14
+
+import java.util.*;
+
+public class reverseFirstK {
+
+    public void reverseFirstK(int k, Queue<Integer> que) {
+        if (k <= 0)
+            return;
+
+        if (que == null || que.size() < k)
+            throw new IllegalArgumentException();
+
+
+        Stack<Integer> st = new Stack<Integer>();
+
+        for (int i=0; i<k; i++)
+            st.push(que.remove());
+
+        while(!st.isEmpty())
+            que.add(st.pop());
+
+        for (int i=0; i<que.size()-k; i++)
+            que.add(que.remove());
+
+    }
+}
+
+// question 12
+
+import java.util.*;
+
+public class shift {
+
+    public void shift (Stack<Integer> s, int n) {
+        Queue<Integer> que = new LinkedList<Integer>();
+        int size = s.size();
+
+        for (int i = 0; i < size - n; i++) {
+            que.add(s.pop());
+        }
+
+        while (!que.isEmpty())
+            s.push(que.remove());
+
+        while (!s.isEmpty())
+            que.add(s.pop());
+
+        while (!que.isEmpty())
+            s.push(que.remove());
+
+    }
+}
+
+//question 13
+import java.util.*;
+
+public class expunge {
+
+    public void expunge(Stack<Integer> s) {
+
+        if (s.size() < 1)
+            return;
+
+        Stack<Integer> st = new Stack<Integer>();
+        st.push(s.pop());
+
+        while(!s.isEmpty()) {
+            if (s.peek() >= st.peek()) {
+                st.push(s.pop());
+            } else {
+                s.pop();
+            }
+        }
+        while(!st.isEmpty())
+            s.push(st.pop());
+
+    }
+}
+
+//question 11
+
+import java.util.*;
+
+public class reorder {
+
+    public void reorder(Queue<Integer> que) {
+        Stack<Integer> st = new Stack<Integer>();
+
+        int size = que.size();
+        int count = 0;
+
+        for (int i = 0; i < size; i++) {
+            int n = que.remove();
+
+            if (n < 0) {
+                st.push(n);
+            } else {
+                que.add(n);
+                count++;
+            }
+        }
+
+        while (!st.isEmpty())
+            que.add(st.pop());
+
+        for (int i = 0; i < count; i++) {
+            que.add(que.remove());
+        }
+
+    }
+}
+
+
+
