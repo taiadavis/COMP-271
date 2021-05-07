@@ -1,0 +1,85 @@
+import java.util.*;
+
+public class GraphClass {
+
+ArrayList<ArrayList<Integer>> graph;
+int size;
+//use outside ArrayList's index as vertex labels
+
+public GraphClass(int val){
+
+    size = val;
+    graph = new ArrayList<>(size);
+
+}
+
+public void breadthFirstTraversal(int v){
+
+    boolean[] marked = new boolean[size];
+    Queue<Integer> que = new LinkedList<>();
+
+    que.add(v);
+
+    while(!que.isEmpty()){
+
+        int first = que.remove();
+        if (!marked[first]){
+            marked[first] = true;
+            System.out.println(first);
+        }
+        ArrayList<Integer> list = graph.get(first);
+
+        for (Integer s:list){
+            if (!marked[s])
+                que.add(s);
+        }
+
+    }
+
+}
+
+public void depthFirstTraversal(int v){
+
+    boolean[] marked = new boolean[size];
+    Stack<Integer> st = new Stack<>();
+
+    st.push(v);
+
+    while(!st.isEmpty()){
+
+        int top = st.pop();
+        if (!marked[top]){
+            marked[top] = true;
+            System.out.println(top);
+        }
+        ArrayList<Integer> list = graph.get(top);
+
+        for (Integer s:list){
+            if (!marked[s])
+                st.push(s);
+        }
+
+    }
+
+}
+
+public static void main(String[] args){
+
+    GraphClass gc = new GraphClass(5);
+    gc.graph.add(new ArrayList<>(List.of(1,2)));
+    gc.graph.add(new ArrayList<>(List.of(0)));
+    gc.graph.add(new ArrayList<>(List.of(0,3,4)));
+    gc.graph.add(new ArrayList<>(List.of(2,4)));
+    gc.graph.add(new ArrayList<>(List.of(2,3)));
+    gc.depthFirstTraversal(0);
+    gc.breadthFirstTraversal(0);
+
+
+//gc.depthFirstTraversal(0);
+//gc.breadthFirstTraversal(0);
+
+gc2.depthFirstTraversal( v: 0); //prints: 0 3 2 6 4 5 1
+gc2.breadthFirstTraversal( v: 0); //prints: 0 1 2 3 4 6 5
+
+}
+}
