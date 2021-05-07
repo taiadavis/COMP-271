@@ -1,0 +1,231 @@
+import java.util.*;
+public class MouseMaze
+{
+    final int N = 7;
+    Stack<Integer> ma = new Stack<Integer>();
+    boolean [][] visited = new boolean[N][N];
+    int[][]maze; 
+    
+       public int convertIJ (int i,int j) {
+           
+          return i*N+j; 
+           
+        }
+        
+        public String  convertK (int k) {
+            
+            int p =k/N;
+            int q =k%N;
+            return (p+","+q);
+        }
+        
+        
+    void printSolution(){
+    
+        for (int i = 0; i < visited.length; i++)
+        for (int j=0; j<visited.length;j++)
+          if (visited[i][j])
+           System.out.println(i+"  "+j);
+    }
+    boolean isSafe(int x, int y){
+        return (x >= 0 && x < N && y >= 0 &&
+                y < N && maze[x][y] == 1 && !visited[x][y]);
+    }
+    boolean solveMaze()
+    {
+        if (!solveMazeUtil(0, 0))
+        {
+            System.out.print("Solution doesn't exist");
+            return false;
+        }
+       // printSolution();
+        return true;
+    }
+ 
+    
+    boolean solveMazeUtil(int x, int y){
+        
+     while(isSafe(x,y) ) {
+           visited[x][y]=true;
+           System.out.println(x+"  "+y);
+          
+        
+           if (isSafe(x, y-1))
+               ma.push(convertIJ(x,y-1)) ;
+            
+              
+            if (isSafe(x-1, y))
+               ma.push(convertIJ(x-1,y)); 
+            
+              
+           if (isSafe(x, y+1))
+               ma.push(convertIJ(x,y+1)); 
+               
+            if (isSafe(x+1, y))
+                ma.push(convertIJ(x+1,y)) ;
+           
+            if (!ma.isEmpty()) {
+            int k= ma.pop();
+            String s=convertK(k);
+            String[] p =s.split(",");
+            x =Integer.valueOf(p[0]);
+            y=Integer.valueOf(p[1]);
+        if (x == N - 1 && y == N - 1)
+        {
+            System.out.println(x+"  "+y);
+            return true;
+        }
+            
+        }
+        else return false;
+    }
+ 
+        return false;
+    }
+ 
+    public static void main(String args[])
+    {
+        MouseMaze mo = new MouseMaze();
+     /*   mo.maze = new int[][]{{1,1,1,1,1},
+            {0, 1, 0, 0,0},
+            {1,1,0,1,1},
+            {1, 0, 1, 1,1},
+            {1, 1, 1, 1,1}
+        };
+        */
+       mo.maze = new int[][]{{1,1,1,0,0,0,0},
+                             {0,0,1,0,0,0,0},
+                             {1,1,1,0,1,1,1},
+                             {1,1,1,1,1,0,1},
+                             {0,0,0,0,0,1,1},
+                             {0,1,1,1,1,1,0},
+                             {0,0,0,1,1,1,1}
+        };
+       
+       
+        mo.solveMaze();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+import java.util.*;
+public class RecursiveMouseMaze
+{
+    final int N = 5;
+    Stack<Integer> ma = new Stack<Integer>();
+    boolean [][] visited = new boolean[N][N];
+    int[][]maze; 
+    
+       public int convertIJ (int i,int j) {
+           
+          return i*N+j; 
+           
+        }
+        
+        public String  convertK (int k) {
+            
+            int p =k/N;
+            int q =k%N;
+            return (p+","+q);
+        }
+        
+        
+    void printSolution(){
+    
+        for (int i = 0; i < visited.length; i++)
+        for (int j=0; j<visited.length;j++)
+          if (visited[i][j])
+           System.out.println(i+"  "+j);
+    }
+    boolean isSafe(int x, int y){
+        return (x >= 0 && x < N && y >= 0 &&
+                y < N && maze[x][y] == 1 && !visited[x][y]);
+    }
+    boolean solveMaze()
+    {
+        if (!solveMazeUtil(0, 0))
+        {
+            System.out.print("Solution doesn't exist");
+            return false;
+        }
+       // printSolution();
+        return true;
+    }
+ 
+    
+    boolean solveMazeUtil(int x, int y){
+        
+        
+         if (x == N - 1 && y == N - 1){
+        
+                  System.out.println(x+"  "+y);
+                  return true;
+                }
+          else {
+           if (isSafe(x,y) ) {
+           visited[x][y]=true;
+           System.out.println(x+"  "+y);
+                  if (solveMazeUtil( x,  y+1))
+                   return true;
+                  if (solveMazeUtil( x+1, y))
+                  return true;
+                  if (solveMazeUtil(x, y-1))
+                  return true;
+                  if (solveMazeUtil(x-1,  y))
+                  return true;
+                }
+                
+            }
+            return false;
+        }
+            
+         /*   if (!ma.isEmpty()) {
+            int k= ma.pop();
+            String s=convertK(k);
+            String[] p =s.split(",");
+            x =Integer.valueOf(p[0]);
+            y=Integer.valueOf(p[1]);
+            */
+          
+        
+    
+ 
+    public static void main(String args[])
+    {
+        RecursiveMouseMaze mo = new RecursiveMouseMaze();
+       mo.maze = new int[][]{{1,1,1,1,1},
+            {0, 1, 0, 0,0},
+            {1,1,0,1,1},
+            {1, 0, 1, 1,1},
+            {1, 1, 1, 1,1}
+        };
+        
+        
+       /*
+       
+       mo.maze = new int[][]{{1,1,1,0,0,0,0},
+                             {0,0,1,0,0,0,0},
+                             {1,1,1,0,1,1,1},
+                             {1,1,1,1,1,0,1},
+                             {0,0,0,0,0,1,1},
+                             {0,1,1,1,1,1,0},
+                             {0,0,0,1,1,1,1}
+        };
+        */
+        
+       
+       
+        mo.solveMaze();
+    }
+}
+
+
+
