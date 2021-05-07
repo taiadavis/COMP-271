@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.*;
+
+public class SynonymsHashMap {
+
+    HashSet<String> SynonymsHashMap = new HashSet<>();
+    HashMap<String, HashSet<String>> synonymList = new HashMap<>();
+
+
+    public static void main (String [] args) {
+        new SynonymsHashMap().run();
+    }
+
+    public void run() {
+
+        Scanner fileScanner;
+        String word = "";
+        int max = 0;
+
+        try {
+
+            fileScanner = new Scanner(new File("synonyms en.txt"));
+
+            while (fileScanner.hasNext()) {
+                String[] synonyms = fileScanner.nextLine().split(",");
+                if (synonyms.length >= 2) {
+                    for (int i = 1; i < synonyms.length; i++) {
+                        SynonymsHashMap.add(synonyms[i]);
+                    }
+                    synonymList.put(synonyms[0], SynonymsHashMap);
+                }
+                    if (synonyms.length > max) {
+                        max = synonyms.length;
+                        word = synonyms[0];
+                    }
+                }
+        } catch (IOException e)
+        {
+            System.out.println(e);
+        }
+        System.out.println("most synonyms = " + (max - 1));
+        System.out.println("the word with the most synonyms = "+word);
+
+    }
+
+
+
+}
+
