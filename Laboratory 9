@@ -1,0 +1,188 @@
+In the attached document containing binary trees, for the first BT, manually figure out preorder, postorder and inorder traversals.  For the second one, build binary trees using code given and obtain the node for all traversals.
+
+
+public class Node <E>{
+
+    Node<E> left;
+    Node<E> right;
+    Node<E> parent;
+    E  label;
+
+    public Node(Node<E> le, Node<E> ri, Node<E> pa){
+        left=le;
+        right=ri;
+        parent=pa;
+
+
+    }
+
+    public Node(E val){
+        left=null;
+        right=null;
+        parent=null;
+        label=val;
+
+
+    }
+
+    public Node(){
+        left=null;
+        right=null;
+        parent=null;
+        label=null;
+
+
+    }
+
+    public void addLeft(Node<E> le) {
+        left=le;
+        le.addParent(this);
+
+
+    }
+
+    public void addRight(Node<E> ri) {
+
+        right=ri;
+        ri.addParent(this);
+    }
+
+    public void addParent(Node<E> pa){
+        parent=pa;
+
+    }
+
+    public void setLabel(E val){
+        label=val;
+
+    }
+
+    public E getlabel(){
+        return label;
+    }
+
+    public Node<E> getLeft(){
+        return left;
+    }
+
+    public Node<E> getRight(){
+        return right;
+    }
+
+}
+
+
+
+
+
+
+
+public class BinaryTree<E> {
+
+    int size;
+    Node<E> root;
+
+    public BinaryTree () {
+        size =0;
+        root=null;
+    }
+
+    public BinaryTree(E val) {
+        root = new Node(val);
+        // root node only
+        size=1;
+
+    }
+
+    public Node<E> addLeft(Node<E> node, E val) {
+        Node<E> n = new Node(val);
+        node.addLeft(n);
+        size++;
+        return n;
+    }
+
+    public Node<E> addRight(Node<E> node, E val) {
+
+        Node<E> n = new Node(val);
+        node.addRight(n);
+        size++;
+        return n ;
+    }
+
+    public void inOrder(Node<E> n) {
+        if (n==null) return;
+
+        inOrder(n.getLeft());
+        System.out.println(n.getlabel());
+        inOrder(n.getRight());
+
+    }
+
+    public void postOrder(Node<E> n) {
+        if (n==null) return;
+
+        postOrder(n.getLeft());
+        postOrder(n.getRight());
+        System.out.println(n.getlabel());
+
+    }
+
+    public void preOrder(Node<E> n) {
+       if (n==null) return;
+
+        System.out.println(n.getlabel());
+        preOrder(n.getLeft());
+        preOrder(n.getRight());
+
+    }
+
+    public static void main(String[] args){
+
+        // BinaryTree<String> bt = new BinaryTree<>("cat");
+        // bt.addLeft(bt.root,"dog");
+        // bt.addRight(bt.root,"mouse");
+        BinaryTree<String> bt = new BinaryTree<>("19");
+
+        Node<String> n1 = bt.addLeft(bt.root,"47");
+        Node<String> n2 = bt.addRight(bt.root,"63");
+        Node<String> n3 = bt.addRight(n1,"-2");
+        Node<String> n4 = bt.addRight(n2,"94");
+
+
+        bt.addLeft(n1,"23");
+        bt.addLeft(n3,"55");
+        bt.addRight(n4,"28");
+        bt.postOrder(bt.root);
+    }
+
+};
+
+
+
+
+
+
+
+
+Labratory 9
+
+1. preorder 351246
+   inorder 153426
+   postorder 154623
+
+2. 
+preorder 19 47 23 -2 55 63 94 28
+inorder 23 47 55 -2 19 63 94 28
+postorder 23 55 -2 47 28 94 63 19
+
+
+
+
+
+
+
+
+
+
+
+
