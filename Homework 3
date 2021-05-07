@@ -1,0 +1,86 @@
+Homework 3
+COMP 271
+13.
+public boolean equals(Object o) {
+ if (o instanceof Cash) {
+ Cash other = (Cash) o;
+ return amount == other.amount;
+ } else {
+ return false;
+ }
+}
+
+
+14.
+// Rectangle
+public boolean equals(Object o) {
+ if (o instanceof Rectangle) {
+ Rectangle other = (Rectangle) o;
+ return width == other.width && height == other.height;
+ } else {
+ return false;
+ }
+}
+// Circle
+public boolean equals(Object o) {
+ if (o instanceof Triangle) {
+ Triangle other = (Triangle) o;
+ return a == other.a && b == other.b && c == other.c;
+ } else {
+ return false;
+ }
+}
+// Triangle
+public boolean equals(Object o) {
+ if (o instanceof Rectangle) {
+ Rectangle other = (Rectangle) o;
+ return width == other.width && height == other.height;
+ } else {
+ return false;
+ }
+}
+
+
+18.
+// An interface to represent items storing a value that can be incremented.
+public interface Incrementable {
+ public void increment();
+ public int getValue();
+}
+// A class that stores a value that increases by 1
+// each time the increment method is called.
+public class SequentialIncrementer implements Incrementable {
+ private int value;
+ // Constructs a new incrementer with value 0.
+ public SequentialIncrementer() {
+ value = 0;
+ }
+ // Increases the value by 1.
+ public void increment() {
+ value++;
+ }
+ // Returns this incrementer's current value.
+ public int getValue() {
+ return value;
+ }
+}
+// A class that stores a random value that changes
+// each time the increment method is called.
+import java.util.*; // for Random
+public class RandomIncrementer implements Incrementable {
+ private int value;
+ private Random rand;
+ // Constructs a new incrementer with value 0.
+ public RandomIncrementer() {
+ rand = new Random();
+ increment();
+ }
+ // Increases the value by 1.
+ public void increment() {
+ value = rand.nextInt();
+ }
+ // Returns this incrementer's current value.
+ public int getValue() {
+ return value;
+ }
+}
