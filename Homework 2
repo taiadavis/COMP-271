@@ -1,0 +1,93 @@
+	4. public class MonsterTruck extends Truck{
+	public void m1() {
+		System.out.println("monster 1");
+	}
+	public void m2() {
+		super.m1();
+		super.m2();
+	}
+	    public String toString() {
+        return "monster " + super.toString();
+		}
+}
+
+TICKET.JAVA
+public abstract class Ticket {
+    private int number;
+    public Ticket(int ticketNumber) {
+        number=ticketNumber;
+    }
+
+    public abstract double getPrice();
+    public String toString() {
+        return "Number: "+this.number+" , Price: "+this.getPrice();
+    }
+}
+
+
+WALKUPTICKET.JAVA
+public class WalkupTicket extends Ticket{
+
+    private double price;
+
+    public WalkupTicket(int number){
+        super(number);
+        price = 50;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+}
+
+STUDENTADVANCETICKET.JAVA
+public class StudentAdvanceTicket extends Ticket {
+    private int days;
+    private double price;
+
+    public StudentAdvanceTicket(int number, int days) {
+        super(number);
+        this.days = days;
+
+        if (days >= 10) {
+            this.price = 15;
+        } else {
+            this.price = 20;
+        }
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+    
+    public String toString(){
+        return "Price: " + super.toString() + " Show student ID";
+    }
+}
+
+ADVANCEDTICKET.JAVA
+public class AdvancedTicket extends Ticket {
+    private int days;
+    private double price;
+
+    public AdvancedTicket(int number, int days) {
+        super(number);
+        this.days=days;
+
+        if (days >= 10) {
+            this.price= 30;
+        } else {
+            this.price= 40;
+        }
+    }
+
+        public double getPrice () {
+            return this.price;
+        }
+
+
+
+}
+
+
+
